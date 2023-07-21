@@ -1,5 +1,5 @@
 // Используй миксин image-set чтобы браузер сам выбрал подходящий формат картинки для фона + фолбэк
-@mixin image-set($pathToImage) {
+@mixin imageSet($pathToImage) {
   background-image: url("#{$pathToImage}.jpg");
   background-image: image-set(
     "#{$pathToImage}.webp"type("image/webp"),

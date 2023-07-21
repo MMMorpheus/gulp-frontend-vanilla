@@ -55,6 +55,8 @@
       "always",
       { "except": ["first-nested", "after-comment", "after-dollar-variable"] }
     ],
-    "scss/dollar-variable-pattern": "[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?"
+    "scss/at-mixin-pattern": "[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?",
+    "scss/dollar-variable-pattern": "[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?",
+    "selector-class-pattern": "[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}"
   }
 }
