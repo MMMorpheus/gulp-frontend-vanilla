@@ -1,0 +1,18 @@
+
+
+.header {
+  background-color: lightblue;
+  padding-block: 20px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    padding: 20px 30px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+  }
+}

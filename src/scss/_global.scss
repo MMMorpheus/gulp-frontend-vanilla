@@ -1,10 +1,6 @@
 // Body
 body {
   font-family: $fontPrimary;
-
-  &.locked {
-    overflow: hidden;
-  }
 }
 
 // Container
@@ -31,6 +27,8 @@ body {
   }
 }
 
+// Wrapper & Main css's classes press the footer to the page bottom, main element grows the whole available space of page
+// Wrapper & Main css's прижимают футер к низу страницы, елемент main растягивается на все доступное пространство страницы
 .wrapper {
   display: flex;
   min-height: 100%;
@@ -39,4 +37,13 @@ body {
 
 .main {
   flex-grow: 1;
+}
+
+.dis-scroll {
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  overscroll-behavior: none;
 }

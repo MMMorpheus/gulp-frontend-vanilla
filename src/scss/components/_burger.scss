@@ -1,0 +1,61 @@
+.burger {
+  @include resetBtn;
+
+  display: none;
+
+  @media screen and (max-width: $burgerBreakPoint) {
+    z-index: 2;
+    display: block;
+    cursor: pointer;
+    font-size: inherit;
+
+    // Icon size
+    transform: scale(.5);
+    transition: all 0.7s, font-size 0s;
+    transition-timing-function: cubic-bezier(0.68, -0.35, 0.265, 1.35);
+  }
+
+  &__icon {
+    width: 3em;
+    height: .375em;
+    border-radius: 1em;
+    background: black;
+    transition: all 0.1s 0.3s, font-size 0s;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      width: 3em;
+      height: 0.375em;
+      border-radius: 1em;
+      background: black;
+      content: "";
+      transition: all 0.3s 0.2s, font-size 0s;
+    }
+
+    &::before {
+      margin-top: -1.125em;
+    }
+
+    &::after {
+      margin-top: 1.125em;
+    }
+  }
+
+  &-active {
+    transform: scale(.5) rotate(180deg);
+
+    .burger__icon::before {
+      transform: rotate(45deg) translate(0.825em, 0.75em);
+    }
+
+    .burger__icon {
+      background: transparent;
+    }
+
+    .burger__icon::after {
+      transform: rotate(-45deg) translate(0.825em, -0.75em);
+    }
+  }
+}

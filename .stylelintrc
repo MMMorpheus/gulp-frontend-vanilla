@@ -1,7 +1,7 @@
 {
   "extends": ["stylelint-config-standard-scss", "stylelint-config-idiomatic-order"],
   "plugins": ["stylelint-at-rule-no-children", "stylelint-declaration-block-no-ignored-properties"],
-  "ignoreFiles": ["./src/scss/_normalize.scss", "./src/scss/_fonts.scss"],
+  "ignoreFiles": ["./src/scss/_normalize.scss", "./src/scss/_fonts.scss", "./src/scss/mixins/_reset.scss"],
   "defaultSeverity": "error",
   "rules": {
     "aditayvm/at-rule-no-children": [{ "ignore": ["&:hover"] }],
@@ -51,6 +51,7 @@
         "selector": "^."
       }
     ],
+    "custom-property-pattern": "[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?",
     "scss/dollar-variable-empty-line-before": [
       "always",
       { "except": ["first-nested", "after-comment", "after-dollar-variable"] }
