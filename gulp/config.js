@@ -10,7 +10,7 @@ const config = {
     fonts: `${srcPath}/assets/fonts`,
     img: `${srcPath}/assets/img/**/*.{jpg,jpeg,png,gif,webp,svg}`,
     imgToWebp: `${srcPath}/assets/img/**/*.{jpg,jpeg,png}`,
-    svgSprite: `${srcPath}/assets/img/icons/*.svg`,
+    svgSprite: `${srcPath}/assets/icons/*.svg`,
     favicons: `${srcPath}/assets/favicons/*.{jpg,jpeg,png,gif}`
   },
   dest: {
