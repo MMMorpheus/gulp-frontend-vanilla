@@ -12,19 +12,18 @@ import {
   fontsBuild,
   imagesBuild,
   imagesWatch,
-  svgSpriteBuild
+  spritesBuild,
+  spritesWatch
 } from './gulp/tasks/index.js';
 
 config.setEnv();
 
 export const build = gulp.series(
   clean,
-  gulp.series(fontsBuild, gulp.parallel(htmlBuild, stylesBuild, scriptsBuild, imagesBuild))
+  gulp.series(fontsBuild, gulp.parallel(htmlBuild, stylesBuild, scriptsBuild, imagesBuild, spritesBuild))
 );
 
 export const watch = gulp.series(
   build,
-  gulp.parallel(server, htmlWatch, stylesWatch, scriptsWatch, imagesWatch)
+  gulp.parallel(server, htmlWatch, stylesWatch, scriptsWatch, imagesWatch, spritesWatch)
 );
-
-export const sprites = svgSpriteBuild;

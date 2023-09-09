@@ -1,0 +1,61 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:list";
+
+// Convert pxs to rems without battpain
+@function rem($px, $base-font-size: 16px) {
+  @return $px / $base-font-size * 1rem;
+}
+
+/// linear-interpolation
+/// Calculate the definition of a line between two points
+/// @param $minValue - expects minimum size
+/// @param $maxValue - expects maximum size
+/// @param $minViewport - expects minimum viewport width, declared by default
+/// @param $maxViewport - expects maximum viewport width, declared by default
+/// @example
+///   width: between(300px, 600px, 480px, 1200px)
+///   width: between(300px, 600px)
+@function between($minValue, $maxValue, $minViewport: 479.98px, $maxViewport: 1449.98px) {
+  $viewportRange: $maxViewport - $minViewport;
+  $valueRange: $maxValue - $minValue;
+
+  @return min($maxValue, max($minValue, calc(#{math.div($valueRange, $viewportRange)} * (100vw - #{$minViewport}) + #{$minValue})));
+}
+
+// Another variant of execution
+// @function between($from, $to, $fromWidth, $toWidth) {
+//   $slope: ($to - $from) / ($toWidth - $fromWidth);
+//   $base: $from - $slope * $fromWidth;
+
+//   @return calc(#{$base} + #{100vw * $slope});
+// }
+
+/// Another variant of execution using sass map
+/// @param $map - A SASS map of viewport widths and size value pairs
+/// @returns A linear equation as a calc() function
+/// @example
+///   font-size: linear-interpolation((320px: 18px, 768px: 26px));
+@function linear-interpolation($map) {
+  $keys: map.keys($map);
+
+  @if length($keys) != 2 {
+    @error "linear-interpolation() $map must be exactly 2 values";
+  }
+
+  // The slope
+  $m: (map.get($map, list.nth($keys, 2)) - map.get($map, list.nth($keys, 1))) / (list.nth($keys, 2) - list.nth($keys, 1));
+
+  // The y-intercept
+  $b: map.get($map, list.nth($keys, 1)) - $m * list.nth($keys, 1);
+
+  // Determine if the sign should be positive or negative
+  $sign: "+";
+
+  @if $b < 0 {
+    $sign: "-";
+    $b: math.abs($b);
+  }
+
+  @return calc(#{$m * 100}vw #{$sign} #{$b});
+}

@@ -1,44 +1,40 @@
-const htmlEl = document.documentElement;
 const bodyEl = document.body;
-
-// Если на странице есть блоки с фиксированым позиционирование, добавь к ним класс fixed-block,
-// чтобы они не смещались вправо при скрытии полосы прокрутки
-// If there are some blocks with fixed position on the page,
-// just add fixed-block class not to shift to the right after the scrollbar was hidden
 const fixBlocks = document?.querySelectorAll('.fixed-block');
 const paddingOffset = `${window.innerWidth - document.body.offsetWidth}px`;
+let scrollPosition = 0;
 
-const enableScroll = () => {
-  const pagePosition = parseInt(bodyEl.dataset.position, 10);
-
-  htmlEl.style.scrollBehavior = 'smooth';
+const enableWithNoScrollOffset = () => {
   bodyEl.classList.remove('dis-scroll');
   fixBlocks?.forEach((el) => {
-    el.style.paddingRight = '0px'; // eslint-disable-line no-param-reassign
+    el.style.paddingRight = ''; // eslint-disable-line no-param-reassign
   });
-  bodyEl.style.paddingRight = '0px';
+  bodyEl.style.paddingRight = '';
   bodyEl.style.top = 'auto';
-  bodyEl.removeAttribute('data-position');
+}
+
+const enableScroll = () => {
+  enableWithNoScrollOffset();
   window.scrollTo({
-    top: pagePosition,
-    left: 0,
+    top: scrollPosition,
+    behavior: 'instant'
   });
 };
 
-const disableScroll = () => {
-  const pagePosition = window.scrollY;
-  bodyEl.dataset.position = pagePosition;
 
-  htmlEl.style.scrollBehavior = 'none';
+const disableScroll = () => {
+  scrollPosition = window.scrollY;
+
   bodyEl.classList.add('dis-scroll');
   fixBlocks?.forEach((el) => {
     el.style.paddingRight = paddingOffset; // eslint-disable-line no-param-reassign
   });
   bodyEl.style.paddingRight = paddingOffset;
-  bodyEl.style.top = `-${pagePosition}px`;
+  bodyEl.style.top = `-${scrollPosition}px`;
 };
 
-export default {
+const scroll = {
   enable: enableScroll,
   disable: disableScroll,
 };
+
+export default scroll;

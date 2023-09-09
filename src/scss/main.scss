@@ -1,12 +1,11 @@
-// Normalize
 @import 'normalize';
-@import './mixins/**/*'
+@import './mixins/**/*';
+@import 'vars';
+@import 'functions';
 
 // App essentials
 // @import 'fonts';
-@import 'vars';
 @import 'global';
 
 // App components
 @import "./components/**/*"
-

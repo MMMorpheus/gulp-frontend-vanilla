@@ -1,10 +1,10 @@
 :root {
   // Задать согласно высоте шапки, чтоб меню не залазило под шапку
   // Относительно этой величины рассчитывается высота мобильного меню, чтоб можно было скроллить
-  --offsetHeight: 100px;
+  --offsetHeight: 98px;
 }
 
-.nav {
+.menu {
   @media screen and (max-width: $burgerBreakPoint) {
     position: fixed;
     top: var(--offsetHeight);
@@ -13,40 +13,34 @@
     height: calc(100% - var(--offsetHeight));
     transform: translateX(100%);
     transition: transform 0.6s ease-in-out;
-
-    // Specify background and add some filter
   }
 
   &__list {
     display: flex;
-    column-gap: 10px;
+    gap: 0 10px;
 
     @media screen and (max-width: $burgerBreakPoint) {
       width: 100%;
       height: 100%;
       flex-direction: column;
       align-items: center;
+      justify-content: space-evenly;
       overflow-y: auto;
     }
   }
 
-  &__item {
-    position: relative;
-    padding: 15px 20px;
-    color: black;
-    font-style: 20px;
-  }
+  // &__item {
+  // }
 
   &__link {
-    color: inherit;
-    font: inherit;
+    padding: 15px 20px;
+    color: black;
+    font-size: 20px;
     text-decoration: none;
 
-    &::after {
-      position: absolute;
-      content: "";
-      inset: 0;
-    }
+    @media screen and (max-width: $burgerBreakPoint) {
+      font-size: 30px;
+    };
   }
 
   &-active {

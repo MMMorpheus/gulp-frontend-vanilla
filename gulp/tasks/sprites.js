@@ -1,4 +1,4 @@
-import gulp from 'gulp'
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import svgSprite from 'gulp-svg-sprite';
@@ -6,10 +6,9 @@ import svgMin from 'gulp-svgmin';
 import cheerio from 'gulp-cheerio';
 import replace from 'gulp-replace';
 
-import config from '../config.js'
+import config from '../config.js';
 
-
-export const svgSpriteBuild = () => {
+export const spritesBuild = () => {
   return gulp
     .src(config.src.svgSprite)
     .pipe(
@@ -27,7 +26,7 @@ export const svgSpriteBuild = () => {
           $('[style]').removeAttr('style');
         },
         parserOptions: {
-          xmlMode: true
+          xmlMode: true,
         },
       })
     )
@@ -40,13 +39,16 @@ export const svgSpriteBuild = () => {
         })
       )
     )
-    .pipe(svgSprite({
-      mode: {
-        stack: {
-          sprite: '../sprite.svg',
-        }
-      }
-    }))
-    .pipe(gulp.dest(config.dest.root))
+    .pipe(
+      svgSprite({
+        mode: {
+          stack: {
+            sprite: '../sprite.svg',
+          },
+        },
+      })
+    )
+    .pipe(gulp.dest(config.dest.img));
+};
 
-}
+export const spritesWatch = () => gulp.watch(config.watch.img[1], spritesBuild)
